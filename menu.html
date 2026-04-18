@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <title>Menu | All Things Dough</title>
+</head>
+<body>
+    <header class="menu-header">
+        <div class="menu-header-inner">
+            <a href="HomePage (1).html" class="back-link">← back</a>
+            <div>
+                <p class="menu-label">menu</p>
+                <h1 id="menu-location-title" class="menu-location">All Things Dough</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="menu-main">
+        <section class="menu-section">
+            <div class="menu-items" id="menu-items"></div>
+                    <div class="menu-allergen-note">Contains milk, nuts, pistachio nut, almond, gluten, eggs. Questions about allergens, ingredients or cooking methods? Please contact the restaurant.</div>
+        </section>
+    <script>
+
+        // Dohhut link: https://docs.google.com/spreadsheets/d/e/2PACX-1vSbAD_bKnSf0BF-uTsWN7GcxZyZMJXQhBILQ1FrNEOTNHcm8-27Dm1rinVclpBvohKMoJyqwHhtWR-F/pub?gid=0&single=true&output=csv
+        // Things in bread link: https://docs.google.com/spreadsheets/d/e/2PACX-1vSbAD_bKnSf0BF-uTsWN7GcxZyZMJXQhBILQ1FrNEOTNHcm8-27Dm1rinVclpBvohKMoJyqwHhtWR-F/pub?gid=1369683929&single=true&output=csv
+        // Bake link: https://docs.google.com/spreadsheets/d/e/2PACX-1vSbAD_bKnSf0BF-uTsWN7GcxZyZMJXQhBILQ1FrNEOTNHcm8-27Dm1rinVclpBvohKMoJyqwHhtWR-F/pub?gid=1239110849&single=true&output=csv
+
+
+        const SHEET_URLS = {
+            dohhut:        'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbAD_bKnSf0BF-uTsWN7GcxZyZMJXQhBILQ1FrNEOTNHcm8-27Dm1rinVclpBvohKMoJyqwHhtWR-F/pub?gid=0&single=true&output=csv',
+            thingsinbread: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbAD_bKnSf0BF-uTsWN7GcxZyZMJXQhBILQ1FrNEOTNHcm8-27Dm1rinVclpBvohKMoJyqwHhtWR-F/pub?gid=1369683929&single=true&output=csv',
+            bake:          'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbAD_bKnSf0BF-uTsWN7GcxZyZMJXQhBILQ1FrNEOTNHcm8-27Dm1rinVclpBvohKMoJyqwHhtWR-F/pub?gid=1239110849&single=true&output=csv'
+        };
+
+        // Function to fetch and parse CSV from Google Sheets
+
+        
+        async function fetchMenuFromSheets(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch CSV');
+                const csvText = await response.text();
+                return parseCSV(csvText);
+            } catch (error) {
+                console.error('Error fetching menu from sheets:', error);
+                return null;
+            }
+        }
+
+
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            if (lines.length < 1) return [];
+            const headers = splitCSVRow(lines[0]).map(h => h.trim().toLowerCase());
+            return lines.slice(1).map(line => {
+                const vals = splitCSVRow(line);
+                const obj = {};
+                headers.forEach((h, i) => { obj[h] = (vals[i] || '').trim(); });
+                return obj;
+            }).filter(row => {
+                if ('display' in row) {
+                    const d = row.display.toLowerCase();
+                    return d === 'true' || d === 'yes' || d === '1';
+                }
+                return true;
+            });
+        }
+ 
+        function splitCSVRow(row) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < row.length; i++) {
+                const ch = row[i];
+                if (ch === '"') {
+                    inQuotes = !inQuotes;
+                } else if (ch === ',' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else {
+                    current += ch;
+                }
+            }
+            result.push(current);
+            return result;
+        }
+
+
+        // ─────────────────────────────────────────────────────────────
+        //  RENDER
+        // ─────────────────────────────────────────────────────────────
+        function renderMenu(items) {
+            console.log('Rendering menu with items:', items);
+            const container = document.getElementById('menu-items');
+            container.innerHTML = '';
+ 
+            // Group by section
+            const sections = {};
+            const sectionSubtitles = {};
+            const sectionOrder = [];
+ 
+            items.forEach(item => {
+                const sec = item.section || '';
+                if (!sections[sec]) {
+                    sections[sec] = [];
+                    sectionSubtitles[sec] = item.sectionsubtitle || item.sectionSubtitle || '';
+                    sectionOrder.push(sec);
+                }
+                sections[sec].push(item);
+            });
+ 
+            const hasSections = sectionOrder.some(s => s !== '');
+ 
+            sectionOrder.forEach(sec => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'menu-subsection';
+ 
+                if (hasSections && sec !== '') {
+                    const hdr = document.createElement('div');
+                    hdr.className = 'menu-subsection-header';
+                    hdr.innerHTML = `
+                        <h2>${sec}</h2>
+                        ${sectionSubtitles[sec] ? `<p>${sectionSubtitles[sec]}</p>` : ''}
+                    `;
+                    wrapper.appendChild(hdr);
+                }
+ 
+                const grid = document.createElement('div');
+                grid.className = 'menu-subsection-grid';
+ 
+                sections[sec].forEach(item => {
+                    const el = document.createElement('div');
+                    el.className = 'menu-item';
+                    el.innerHTML = `
+                        <div class="item-content">
+                            <div class="item-info">
+                                <h3 class="item-name">${item.name}</h3>
+                                ${item.description ? `<p class="item-description">${item.description}</p>` : ''}
+                                ${item.price ? `<p class="item-price">${item.price}</p>` : ''}
+                            </div>
+                            <div class="item-image-placeholder">Image<br>placeholder</div>
+                        </div>
+                    `;
+                    grid.appendChild(el);
+                });
+ 
+                wrapper.appendChild(grid);
+                container.appendChild(wrapper);
+            });
+        }
+ 
+        function showError() {
+            document.getElementById('menu-items').innerHTML = `
+                <div style="grid-column:1/-1;padding:3rem;text-align:center;opacity:0.5;font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase;">
+                    Could not load menu. Please try again later.
+                </div>`;
+        }
+
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const key = (params.get('location') || '').toLowerCase();
+
+            const locations = {
+                dohhut: "doh'hut",
+                thingsinbread: 'things in bread',
+                bake: 'bake'
+            };
+
+
+            const title = document.getElementById('menu-location-title');
+            title.innerHTML = locations[key] || 'All Things Dough';
+            
+            
+            if (SHEET_URLS[key]) {
+                const menuData = await fetchMenuFromSheets(SHEET_URLS[key]);
+                if (menuData) {
+                    renderMenu(menuData, key);
+                } else {
+                    const menuItemsContainer = document.getElementById('menu-items');
+                    menuItemsContainer.innerHTML = '<p>Menu not available. Please try again later.</p>';
+                }
+            } else {
+                const menuItemsContainer = document.getElementById('menu-items');
+                menuItemsContainer.innerHTML = '';
+                Object.keys(locations).forEach(locationKey => {
+                    const link = document.createElement('a');
+                    link.className = 'menu-item menu-link';
+                    link.href = `menu.html?location=${locationKey}`;
+                    link.textContent = `${locations[locationKey]} menu`;
+                    menuItemsContainer.appendChild(link);
+                });
+            }
+        });
+    </script>
+    </main>
+</body>
+</html>

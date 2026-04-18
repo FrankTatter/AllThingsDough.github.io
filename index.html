@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="HomePage(1).css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <title>All Things Dough</title>
+</head>
+<body>
+
+    <!-- ── HEADER ── -->
+    <header id="header">
+        <div class="linecontainer" onclick="toggleTransform(this)" aria-label="Open menu">
+            <div class="line1"></div>
+            <div class="line2"></div>
+        </div>
+
+        <nav class="optionscontainer" id="optionscontainer">
+            <a class="nav-link" onclick="window.location.href='https://dohhut.com/'">doh'hut</a>
+            <a class="nav-link" onclick="window.location.href='https://thingsinbread.com/'">things in bread</a>
+            <a class="nav-link" onclick="window.location.href=''">bake</a>
+            <a class="nav-link" onclick="window.location.href=''">our story</a>
+        </nav>
+
+        <div class="title-wrap">
+            <h1 class="title">All Things Dough</h1>
+            <p class="title-sub">doh'hut · things in bread · bake</p>
+        </div>
+    </header>
+
+    <!-- ── 3D HERO ── -->
+    <section id="3Dcontainer">
+        <!-- Brand cards overlay -->
+        <div class="optionscontainer2">
+            <div class="brand-card dohhut" onclick="window.location.href='https://dohhut.com/'" role="button" tabindex="0">
+                <!-- <span class="brand-label">donut</span> -->
+                <img class="DohhutImg" src="Images/Dohhut_FullLogo_Colour-300x269.png" alt="Doh'hut logo">
+            </div>
+            <div class="brand-card TIBs" onclick="window.location.href='https://thingsinbread.com/'" role="button" tabindex="0">
+                <!-- <span class="brand-label">sandwich</span> -->
+                <img class="TIBsImg" src="Images/thingsinbreadlightbox.png" alt="Things in Bread logo">
+            </div>
+            <div class="brand-card BAKE" onclick="window.location.href='/BAKE.html'" role="button" tabindex="0">
+                <!-- <span class="brand-label">sausage roll</span> -->
+                <img class="BAKEImg" src="Images/447088366_1185212095811694_6802897672677675584_n.png" alt="Bake logo">
+            </div>
+        </div>
+
+        <script src="gsap.min.js"></script>
+        <script type="module" src="script.js"></script>
+    </section>
+
+    <!-- ── KEY INFO ── -->
+    <section class="keyInfo">
+        <h2 class="section-heading">key information</h2>
+
+        <div class="info-grid">
+
+            <!-- DOH'HUT -->
+            <div class="info-card dohhut-info">
+                <h3 class="info-brand">doh'hut</h3>
+                <div class="info-block">
+                    <p class="info-label">opening hours</p>
+                    <p class="info-text">MON – SAT: 8AM – 6PM<br>SUN: 10AM – 6PM</p>
+                </div>
+                <a href="menu.html?location=dohhut" class="menu-btn">menu</a>
+                <a href="https://deliveroo.co.uk/menu/Leeds/leeds-city-centre/doh-hut-leeds" target="_blank" class="preorder-btn">pre-order</a>
+                <div class="info-block">
+                    <p class="info-label">find us</p>
+                    <p class="info-text">2 TREVELYAN SQUARE<br>LEEDS, LS1 6ED</p>
+                </div>
+                <p class="info-email">LEEDS@DOHHUT.COM</p>
+                <a href="https://www.instagram.com/dohhut/" target="_blank" class="insta-link" aria-label="Doh'hut Instagram">
+                    <svg class="insta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                    @dohhut
+                </a>
+            </div>
+
+            <!-- THINGS IN BREAD -->
+            <div class="info-card tib-info">
+                <h3 class="info-brand">things in bread</h3>
+                <div class="info-block">
+                    <p class="info-label">opening hours</p>
+                    <p class="info-text">MON – FRI: 8AM – 3PM<br>SAT: 8AM – 4PM<br>SUN: 10AM – 4PM</p>
+                </div>
+                <a href="menu.html?location=thingsinbread" class="menu-btn">menu</a>
+                <a href="https://order.storekit.com/things-in-bread/menu" target="_blank" class="preorder-btn">pre-order</a>
+                <div class="info-block">
+                    <p class="info-label">find us</p>
+                    <p class="info-text">15 BOAR LANE<br>LEEDS, LS1 6AE</p>
+                </div>
+                <p class="info-email">TOM@THINGSINBREAD.COM</p>
+                <a href="https://www.instagram.com/things_in_bread/" target="_blank" class="insta-link" aria-label="Things In Bread Instagram">
+                    <svg class="insta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                    @things_in_bread
+                </a>
+            </div>
+
+            <!-- BAKE -->
+            <div class="info-card bake-info">
+                <h3 class="info-brand">bake</h3>
+                <div class="info-block">
+                    <p class="info-label">opening hours</p>
+                    <p class="info-text">MON – FRI: 8AM – 4PM<br>SAT – SUN: 9AM – 4PM</p>
+                </div>
+                <a href="menu.html?location=bake" class="menu-btn">menu</a>
+                <a aria-disabled="true" class="preorder-btn disabled">pre-order</a>
+                <div class="info-block">
+                    <p class="info-label">find us</p>
+                    <p class="info-text">LOCKSIDE<br>LEEDS, LS1 4EY</p>
+                </div>
+                <p class="info-email">LEEDS@DOHHUT.COM</p>
+                <a href="#" class="insta-link" aria-label="Bake Instagram">
+                    <svg class="insta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                    @bake
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── OUR STORY ── -->
+    <section class="our-story">
+        <div class="story-inner">
+            <h2 class="section-heading">our story</h2>
+            <div class="story-grid">
+                <div class="story-text">
+                    <p class="story-lead">It started with a donut and a dream.</p>
+
+                    <p>Before there were shops, there was a trestle table, a gazebo, and a food trailer rolling across the UK and Europe. Tom — founder of doh'hut — took a road trip down the west coast of the USA, fell in love with food truck culture, and came home with one question: what's more British than a raspberry jam donut?</p>
+
+                    <p>From his parents' kitchen to the streets of Leeds, doh'hut grew into something nobody expected. In 2018 they won the British Street Food Awards — beating the best in the country and being crowned champions by culinary legends Richard Corrigan and Gizzi Erskine. The following weekend they were in Berlin, walking away with Best Dessert at the European Street Food Awards. Not bad for a man and his donuts.</p>
+
+                    <p>In January 2020, doh'hut found its permanent home at Trevelyan Square, Leeds — a proper bricks-and-mortar hut for hand-rolled, freshly fried donuts made every morning.</p>
+
+                    <p>But doh'hut was always meant to be more. The shop's destiny was always to become an <em>all things dough</em> destination. And while the donuts took over Trevelyan Square, something else was quietly being born around the corner.</p>
+
+                    <p>Things in Bread grew out of a love — and a frustration. Tom kept asking the same questions over a supermarket meal deal: why is the bread so dry? Why are the fillings so bland? Why can't anyone give us a better version of the classics we already love? So he spent two years perfecting a bread recipe — a signature shokupan milk loaf: perfectly square, impossibly fluffy, with a crispy crust. Then he took 15 Boar Lane, and brought Leeds the made-to-order sandwich shop it had been missing.</p>
+
+                    <p>And then came Bake — the bakery that ties it all together, fuelling the whole operation from Lockside. The sausage rolls, the pastries, the things that make mornings worth getting up for.</p>
+
+                    <p class="story-cta-text">Three shops. One city. One obsession with doing dough properly.</p>
+                </div>
+
+                <div class="story-aside">
+                    <div class="award-card">
+                        <img src="Images/British-Street-Food-Awards-Champion-1-uai-258x189-1.png" alt="British Street Food Awards Champion 2018" class="award-img">
+                    </div>
+                    <div class="award-card">
+                        <img src="Images/European-Street-Food-Awards-Winner-Best-Dessert-uai-258x186-1.png" alt="European Street Food Awards Winner Best Dessert 2018" class="award-img">
+                    </div>
+                    <!-- <blockquote class="story-quote">
+                        "What's more British than a raspberry jam donut?"
+                    </blockquote> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="site-footer">
+        <p class="footer-title">All Things Dough</p>
+        <p class="footer-sub">doh'hut · things in bread · bake · Leeds</p>
+        <p class="footer-legal">© 2024 | DOHHUT LTD (Co. No. 14147161) | TJ STAFFORD LTD (Co. No. 13790860)</p>
+    </footer>
+
+    <script>
+        function toggleTransform(element) {
+            element.classList.toggle('clicked');
+            const nav = document.getElementById("optionscontainer");
+            nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+        }
+    </script>
+
+</body>
+</html>
