@@ -37,20 +37,67 @@
             <div class="brand-card dohhut" onclick="window.location.href='https://dohhut.com/'" role="button" tabindex="0">
                 <!-- <span class="brand-label">donut</span> -->
                 <img class="DohhutImg" src="Images/Dohhut_FullLogo_Colour-300x269.png" alt="Doh'hut logo">
+                <a href="menu.html?location=dohhut" class="Omenu-btn">order now!</a>
             </div>
             <div class="brand-card TIBs" onclick="window.location.href='https://thingsinbread.com/'" role="button" tabindex="0">
                 <!-- <span class="brand-label">sandwich</span> -->
                 <img class="TIBsImg" src="Images/thingsinbreadlightbox.png" alt="Things in Bread logo">
+                <a href="menu.html?location=tib" class="Omenu-btn">order now!</a>
             </div>
             <div class="brand-card BAKE" onclick="window.location.href='/BAKE.html'" role="button" tabindex="0">
                 <!-- <span class="brand-label">sausage roll</span> -->
                 <img class="BAKEImg" src="Images/447088366_1185212095811694_6802897672677675584_n.png" alt="Bake logo">
+                <a href="menu.html?location=bake" class="Omenu-btn">menu</a>
             </div>
         </div>
 
         <script src="gsap.min.js"></script>
         <script type="module" src="script.js"></script>
     </section>
+
+
+
+    <!-- ── photos ── -->
+    
+
+    <script>
+        function displayNextImage() {
+            x = (x === DHimages.length - 1) ? 0 : x + 1;
+            document.getElementById("DH-img").src = DHimages[x];
+            document.getElementById("TIB-img").src = TIBimages[x];
+            document.getElementById("BAKE-img").src = BAKEimages[x];
+        }
+
+
+        window.onload = function startTimer() {
+            setInterval(displayNextImage, 5000); // Change image every 5 seconds
+        }
+
+
+        var DHimages = [], x = 0;
+        DHimages[0] = "Images/DH-Box.png";
+        DHimages[1] = "Images/DH-fillingshot.png";
+        DHimages[2] = "Images/DH-matt.png";
+
+        var TIBimages = [], x = 0;
+        TIBimages[0] = "Images/TIB-FishFinger.png";
+        TIBimages[1] = "Images/TIB-EC.png";
+        TIBimages[2] = "Images/TIB-TIB.png";
+
+        var BAKEimages = [], x = 0;
+        BAKEimages[0] = "Images/BAKE-counter1.png";
+        BAKEimages[1] = "Images/BAKE-counter2.png";
+        BAKEimages[2] = "Images/BAKE-VanilSlice.png";
+    </script>
+
+    <section class="photos">
+        <div class="photo-grid" >
+            <img id="DH-img" class="image" src="Images/DH-fillingshot.png" alt="Doh'hut interior">
+            <img id="TIB-img" class="image" src="Images/TIB-FishFinger.png" alt="Things in Bread interior">
+            <img id="BAKE-img" class="image" src="Images/BAKE-counter2.png" alt="Bake counter">
+        </div>
+    </section>
+
 
     <!-- ── KEY INFO ── -->
     <section class="keyInfo">
@@ -145,12 +192,18 @@
                 </div>
 
                 <div class="story-aside">
-                    <div class="award-card">
-                        <img src="Images/British-Street-Food-Awards-Champion-1-uai-258x189-1.png" alt="British Street Food Awards Champion 2018" class="award-img">
+                    <div class="awards">
+                        <div class="award-card">
+                            <img src="Images/British-Street-Food-Awards-Champion-1-uai-258x189-1.png" alt="British Street Food Awards Champion 2018" class="award-img">
+                        </div>
+                        <div class="award-card">
+                            <img src="Images/European-Street-Food-Awards-Winner-Best-Dessert-uai-258x186-1.png" alt="European Street Food Awards Winner Best Dessert 2018" class="award-img">
+                        </div>
                     </div>
-                    <div class="award-card">
-                        <img src="Images/European-Street-Food-Awards-Winner-Best-Dessert-uai-258x186-1.png" alt="European Street Food Awards Winner Best Dessert 2018" class="award-img">
+                    <div >
+                        <img class="TomPhoto" src="Images/TomBake.png" alt="">
                     </div>
+                    
                     <!-- <blockquote class="story-quote">
                         "What's more British than a raspberry jam donut?"
                     </blockquote> -->
